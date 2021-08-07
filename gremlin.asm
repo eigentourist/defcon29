@@ -17,6 +17,8 @@ extern ReadConsoleA
 segment .text
 
 main:
+    push    rbp
+    mov     rbp, rsp
     sub     rsp, 56                         ; Allocate memory on the stack for local variables, 16-bit aligned
 
     mov     rcx, STD_OUTPUT_HANDLE          ; First (and only) parameter is the constant for standard output
@@ -93,8 +95,10 @@ cleanup:
 
     pop     r13
     pop     r12
-    add     rsp, 56
-    xor     rax, rax
+    mov rsp, rbp
+    pop rbp
+    xor eax, eax
+
     call    ExitProcess
 
 segment .data
