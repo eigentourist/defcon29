@@ -16,21 +16,21 @@ WinMain:
     sub rsp, 32
     sub rsp, 64
 
-    ; do something erroneous
+; do something erroneous
     mov     rcx, FakeLibName
     call    LoadLibraryA
     call    GetLastError
     mov     [lastErrorCode], eax
 
-    ; create error message
+; create error message
     mov rcx, message
     mov rdx, msgsize
     mov r8,  errstr
     mov r9,  [lastErrorCode]
     call snprintf
 
-	; show the message box
-    xor eax, eax
+; show the message box
+    xor ecx, ecx
     lea rdx, [message]
     lea r8,  title
     mov r9d, MB_OK
@@ -38,12 +38,12 @@ WinMain:
 
     mov rsp, rbp
     pop rbp
-    xor ecx, ecx
-	call ExitProcess
+    xor eax, eax
+    call ExitProcess
 
 segment .data
-    MB_OK   equ 0
-	title	    db "Error occurred", 0
+    MB_OK       equ 0
+    title	db "Error occurred", 0
     FakeLibName db "abcd.dll",0
     errstr      db "Error code: %x", 0
     msgsize     equ 32
