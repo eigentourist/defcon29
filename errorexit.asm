@@ -36,7 +36,7 @@ main:
     mov     rsp, rbp
     pop     rbp
     xor     rax, rax
-	call    ExitProcess
+    call    ExitProcess
 
 segment .data
     STD_INPUT_HANDLE    equ -10
