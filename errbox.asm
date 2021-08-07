@@ -30,7 +30,7 @@ WinMain:
     call snprintf
 
 	; show the message box
-    xor ecx, ecx
+    xor eax, eax
     lea rdx, [message]
     lea r8,  title
     mov r9d, MB_OK
