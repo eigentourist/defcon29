@@ -16,46 +16,6 @@ extern printf
 
 segment .text
 
-; *****
-; DWORD FormatMessageW(DWORD dwFlags, LPCVOID lpSource, 
-; DWORD dwMessageId, DWORD dwLanguageId, 
-; -- parameters below are being pushed onto the stack --
-; LPWSTR lpBuffer, DWORD nSize, va_list *Arguments)
-; *****
-; printerror:
-;     push    rbp
-;     mov     rbp, rsp
-;     sub     rsp, 8  ; 8 bytes for caller return address
-;     sub     rsp, 32 ; shadow space for incoming parameters in registers
-;     sub     rsp, 32 ; 20 bytes being used for local variables, but need 16-byte alignment
-
-;     call GetLastError
-;     mov  [lastErrorCode], eax
-
-;     xor  rcx, rcx
-;     or   rcx, FORMAT_MESSAGE_ALLOCATE_BUFFER
-;     or   rcx, FORMAT_MESSAGE_FROM_SYSTEM
-;     or   rcx, FORMAT_MESSAGE_IGNORE_INSERTS
-;     mov  rdx, 0
-;     mov  r8,  [lastErrorCode]
-;     mov  r9,  0
-
-;     mov  qword [rsp], 0       ; 8 bytes
-;     mov  dword [rsp+8], 0     ; 4 bytes
-; ;    mov  qword [rsp+12], MsgBuffer     ; -- don't do this, it creates linker fixup errors
-;     mov  rax, MsgBuffer
-;     mov  qword [rsp+12], rax  ; 8 bytes
-;     call FormatMessageW
-
-;     mov  rcx, [MsgBuffer]
-;     call wprintf
-
-;     mov     rsp, rbp
-;     pop     rbp
-;     xor     rax, rax
-;     ret
-
-
 main:
     push rbp
     mov rbp, rsp
@@ -65,7 +25,6 @@ main:
 
     mov     rcx, FakeLibName
     call    LoadLibraryA
-;    call    printerror
 
     call GetLastError
     mov  [lastErrorCode], eax
