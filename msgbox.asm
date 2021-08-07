@@ -10,9 +10,9 @@ segment .text
 WinMain:
     push rbp
     mov rbp, rsp
-    sub rsp, 40
+    sub rsp, 32
 
-; show the message box
+	; show the message box
     xor ecx, ecx
     lea rdx, message
     lea r8,  title
@@ -21,11 +21,10 @@ WinMain:
 
     mov rsp, rbp
     pop rbp
-    xor ecx, ecx
-    call ExitProcess
+    xor rax, rax
+	call ExitProcess
 
 segment .data
     MB_OK   equ 0
-    title   db "It's a MessageBox!", 0
-    message db "This messagebox was created in assembly language!", 0
-
+	title	db "It's a MessageBox!", 0
+	message db "This messagebox was written in assembly language!", 0
