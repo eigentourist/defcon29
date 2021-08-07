@@ -1,0 +1,1 @@
+cl gotepad.c /DEBUG
