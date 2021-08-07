@@ -16,7 +16,7 @@ segment .text
 keyboard_hook:
     push    rbp
     mov     rbp, rsp
-    sub     rsp, 32
+    sub     rsp, 40
 
     ; Store parameters
     mov     dword [code], ecx
