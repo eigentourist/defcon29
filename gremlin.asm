@@ -46,7 +46,7 @@ main:
     mov     byte [keycount], 0
     push    r12
     mov     r12, message
-    push    13
+    push    r13
     mov     r13, 0
 
 keyloop:
